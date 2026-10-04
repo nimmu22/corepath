@@ -7,6 +7,6 @@ async function textRequest(url:string){for(let n=0;n<2;n++){try{const r=await fe
 export async function fetchIndiaEmployer(e:typeof INDIA_EMPLOYERS[number]):Promise<Job[]>{const jobs:Job[]=[];if(e.kind==='career'){
  // Index factual title/location/link metadata only. Never access application/account/services paths.
  const robots=await textRequest(e.url+'/robots.txt');if(robots.split('\n').some(line=>/^Disallow:\s*(?:\/search\/?|\/)\s*$/i.test(line.trim())))throw Error('Search indexing not permitted');
- for(const q of ['civil','mechanical','electrical']){const html=await textRequest(`${e.url}/search/?q=${q}&startrow=0`);if(!/<html[^>]*lang="en/i.test(html))throw Error('English source required');jobs.push(...parseCareerPage(html,e))}
+ for(const q of ['civil','mechanical','electrical','software','developer','data']){const html=await textRequest(`${e.url}/search/?q=${q}&startrow=0`);if(!/<html[^>]*lang="en/i.test(html))throw Error('English source required');jobs.push(...parseCareerPage(html,e))}
  }else{for(let page=0;page<2;page++){const data=JSON.parse(await textRequest(`https://api.smartrecruiters.com/v1/companies/${e.board}/postings?country=in&language=en&limit=100&offset=${page*100}`));if(!Array.isArray(data.content))throw Error('Invalid posting response');for(const x of data.content){const j=normalizeSmart(x,e);if(j)jobs.push(j)}if((page+1)*100>=data.totalFound)break}}
  return [...new Map(jobs.map(j=>[j.id,j])).values()]}
