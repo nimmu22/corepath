@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {classify,safeUrl,dedupKey} from '../lib/jobs.ts';
-assert.equal(classify('Software Engineer','Civil engineering software'),null);
+assert.equal(classify('Software Engineer','Civil engineering software')?.branch,'Computer Science / IT');
 assert.equal(classify('Graduate Mechanical Engineer','CAD')?.branch,'Mechanical');
 assert.equal(classify('Electrical Controls Engineer','')?.branch,'Electrical');
 assert.equal(classify('Quantity Surveyor','')?.branch,'Civil');
@@ -10,4 +10,17 @@ assert.equal(safeUrl('https://user:password@example.com'),null);
 assert.equal(safeUrl('https://example.com/jobs'),'https://example.com/jobs');
 assert.equal(dedupKey({company:'ACME Ltd',title:'Site Engineer',location:'Jaipur'}),dedupKey({company:'acme ltd.',title:'Site engineer',location:'JAIPUR'}));
 
-console.log('8 classification, URL safety and deduplication assertions passed.');
+assert.equal(classify('Structural Engineer','Python and civil engineering software')?.branch,'Civil');
+assert.equal(classify('Mechanical Design Engineer','Software tools')?.branch,'Mechanical');
+assert.equal(classify('Frontend Developer Intern','')?.specialization,'Web development');
+assert.equal(classify('Data Analyst','')?.specialization,'Data analysis');
+assert.equal(classify('Machine Learning Engineer','')?.specialization,'AI / ML');
+assert.equal(classify('DevOps Engineer','')?.specialization,'Cloud / DevOps');
+assert.equal(classify('Cybersecurity Analyst','')?.specialization,'Cybersecurity');
+assert.equal(classify('Software Test Engineer','')?.specialization,'Software testing');
+assert.equal(classify('Electrical Automation Engineer','')?.branch,'Electrical');
+assert.equal(classify('Sales Manager','Software products'),null);
+assert.equal(classify('AI/ML Engineer','')?.specialization,'AI / ML');
+assert.equal(classify('Business Developer',''),null);
+assert.equal(classify('QA Engineer','Manufacturing quality')?.branch,'Mechanical');
+console.log('Engineering and IT classification, URL safety and deduplication checks passed.');
