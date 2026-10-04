@@ -1,0 +1,5 @@
+strictDepBuilds: true
+allowBuilds:
+  core-js: false
+  sharp: true
+  unrs-resolver: true
