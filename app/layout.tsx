@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "CorePath | Engineering careers",
-  description: "Find civil, mechanical and electrical engineering jobs in India and beyond.",
+  description: "Find civil, mechanical, electrical and computer science jobs in India and beyond.",
   other: {
     "codex-preview": "development",
   },
