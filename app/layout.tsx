@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import VisitCounter from './visit-counter';
 
 export const metadata: Metadata = {
   title: "CorePath | Engineering careers",
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="dark" suppressHydrationWarning>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">{children}<VisitCounter/></body>
     </html>
   );
 }
